@@ -53,11 +53,17 @@ def scrape():
 
     #Soup object
     html = browser.html
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, 'html.parser')   
 
     #Get latest mars weather tweet
-    tweet = soup.find('p', class_ = "TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text
-
+    tweets = soup.find_all('span', class_ = 'css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0')
+    tweet = []
+    for words in tweets:
+        weather = words.text
+        print(weather.partition(' ')[0])
+        if weather.partition(' ')[0] == "InSight":
+            tweet.append(weather)
+            break
     #Add tweet to dictionary
     marsDictionary["weather"] = tweet
 
@@ -106,6 +112,3 @@ def scrape():
 
 
     return marsDictionary
-
-    
-

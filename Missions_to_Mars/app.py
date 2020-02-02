@@ -19,13 +19,10 @@ def scrape():
 
     #Add it to mongo database
     db.mars.insert(marsDb)
-
 @app.route("/")
 def index():
     marsData = db.mars.find_one()
-    return render_template("index.html", marsData = marsData)
+    return render_template("index.html", mars = marsData)
 
-#Left it at this point
-#* Create a template HTML file called `index.html` that will take the mars data dictionary 
-#and display all of the data in the appropriate HTML elements. Use the following as a guide 
-#for what the final product should look like, but feel free to create your own design.    
+if __name__=="__main__":
+    app.run()
